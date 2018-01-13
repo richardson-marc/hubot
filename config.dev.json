@@ -1,0 +1,35 @@
+{
+    "environment": "dev",
+    "hostname": "d10.leankit.io",
+    "boards" : {
+        "web" : {
+            "source":{
+                "techreview_cos": "10113076370",
+                "board_id": "10113035868",
+                "lane_id": "10113035984",
+                "lane_tomove": "10113035982"
+            },
+            "target":{
+                "techreview_cos": "10113076369",
+                "board_id": "10113035869",
+                "lane_id": "10113036002",
+                "cardtype_id": "10113036179"
+            }
+        },
+        "analytics": {
+            "source": {
+                "techreview_cos": "123456",
+                "board_id": "10113240191",
+                "lane_id": "10113240307",
+                "lane_tomove": "10113240305"
+            },
+            "target": {
+                "techreview_cos": "10113076369",
+                "board_id": "10113035869",
+                "lane_id": "10113036002",
+                "cardtype_id": "10113036179"
+            }
+        }
+    
+    }
+}

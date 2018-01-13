@@ -1,0 +1,36 @@
+#Get my leankit cards!
+
+user = process.env.LEANKIT_USER_NAME
+pass = process.env.LEANKIT_PASSWORD
+
+module.exports = (robot) ->
+  robot.respond /Get leankit cards/i, (msg) ->
+    auth = 'Basic ' + new Buffer(user + ':' + pass).toString('base64')
+    msg.http('https://banditsoftware.leankit.com/io/card/?board=1190689505&lane_class_types=active')
+      .headers("Authorization": auth, "Accept": "application/json")
+      .get() (res, err, body) ->
+        try
+          response = JSON.parse body
+          #console.log body
+          #console.log response.cards
+          i = 0
+          while i < response.cards.length
+            console.log response.pageMeta.totalRecords
+            console.log response.cards.length
+            console.log i
+            console.log response.cards[i].title
+            output.push response.cards[i].title
+            i++
+          console.log output
+          #console.log response.cards.length
+          #console.log response.cards[1].title
+          #console.log body.cards[0].title
+          #console.log response.cards[0].length
+          #for cards in response
+          #  cardresponse += "#{cards.title}"
+          #msg.send cardresponse
+          #msg.send response
+          #msg.send response.cards[0].title
+          #msg.send response.cards[0].title.length body
+          #msg.send body
+

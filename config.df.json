@@ -1,0 +1,34 @@
+{
+    "environment": "dogfood",
+    "hostname": "banditsoftware.leankit.com",
+    "boards": {
+        "web": {
+            "source": {
+                "techreview_cos": "1190461352",
+                "board_id": "1190460942",
+                "lane_id": "1190701932",
+                "lane_tomove": "1190701930"
+            },
+            "target": {
+                "techreview_cos": "1190712541",
+                "board_id": "1190689505",
+                "lane_id": "1191355507",
+                "cardtype_id": "1190689711"
+            }
+        },
+        "analytics": {
+            "source": {
+                "techreview_cos": "123456",
+                "board_id": "1189908980",
+                "lane_id": "1190210725",
+                "lane_tomove": "1190690970"
+            },
+            "target": {
+                "techreview_cos": "34546",
+                "board_id": "1190689505",
+                "lane_id": "1191355507",
+                "cardtype_id": "1190689709"
+            }
+        }
+    }
+}

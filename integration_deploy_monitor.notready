@@ -1,0 +1,78 @@
+
+let config
+
+if (process.env.LEANKIT_ENVIRONMENT == "dev") {
+    console.log("firing up with dev config");
+    config = require("../configs/config.dev.json")
+    console.log(config.boards.web.source.board_id);
+};
+if (process.env.LEANKIT_ENVIRONMENT == "df") {
+    console.log("firing up with df config");
+    config = require("../configs/config.df.json")
+};
+const username = process.env.LEANKIT_USER_NAME;
+const password = process.env.LEANKIT_PASSWORD;
+//const hostname = process.env.LEANKIT_HOSTNAME;
+const hostname = config.hostname;
+const request = require( "request-promise" );
+const baseURL = "https://" + hostname;
+const cardUrl = baseURL + "/io/card/";
+const boardBaseURL = baseURL + "/io/board";
+
+const auth = "Basic " + new Buffer( username + ":" + password ).toString( "base64" ); 
+const srcBoardId = config.boards.deployment.board_id;
+const srcLaneId = config.boards.deployment.lane_id;
+const srcBoardUrl = baseURL + "/io/board/" + srcBoardId + "/card?lanes=" + srcLaneId;
+
+async function getCards( boardUrl ) {
+    //get all cards in the lane
+    try {
+        return body = await request.get( {
+            url: boardUrl,
+            headers: {
+        	"Authorization": auth
+            },
+            json: true
+        } )
+        //return body;
+    } catch(err)
+    {
+        console.log( `getCards ${err}` );
+        return err;
+    }
+}
+
+async function getComments( cardId ) {
+    //get card comments to determine if we need to 
+    //send a Slack message
+
+}
+
+async function writeComment( cardId ) {
+    //write a comment to look for so we don't
+    //send an alert twice
+
+}
+
+
+async function sendSlackMessage( ) {
+    //send Slack Message for card
+}
+
+
+
+module.exports = robot => {
+    monitorLane();
+
+    async function monitorLane( ) {
+        let boardDataUrl = `${boardBaseURL}/${srcBoardId}`;
+        let boardData = await getBoard( boardDataUrl );
+
+        let boardLane = await boardData.lanes.find(x => x.id === srcLaneId);
+        if (boardLane.cardCount <= 0) {
+            setTimeout( () => monitorLane(), 300000)
+            return;
+        }
+
+    }
+}
